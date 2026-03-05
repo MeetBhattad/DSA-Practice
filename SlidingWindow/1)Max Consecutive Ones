@@ -1,0 +1,29 @@
+1004) Max Consecutive Ones III
+Approach- 
+Take 2 pointers r and l
+if the r pointer is 0, increase no. of zeros
+if no. of zeros exceed the given k, check if the l pointer points to 0. if it does, decrease zeros and then move l
+finally when the zeroes <= k find maxlen and return it after moving the pointer.
+
+int longestOnes(vector<int>& nums, int k) {
+        int n = nums.size();
+        int zeros = 0;
+        int l = 0;
+        int r = 0;
+        int maxlen = 0;
+        while(r < n){
+            if(nums[r] ==  0){
+                zeros++;
+            }
+            if(zeros > k){
+                if(nums[l] == 0) zeros--;
+                l++;
+            }
+            if(zeros <= k){
+                maxlen = max(maxlen, r-l+1);
+            }
+            r++;
+
+        }
+        return maxlen;
+    }
