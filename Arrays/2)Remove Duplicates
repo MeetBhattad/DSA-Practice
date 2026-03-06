@@ -1,0 +1,18 @@
+26) Remove Duplicates
+Approach-
+we will use 2 pointer approach since we were asked to do it in-place
+take j = 0 and start for loop from i = 1
+if the elements are not equal, we move j ahead by one place FIRST and only then do we move the unique element to jth index.
+TC- O(N)
+
+int removeDuplicates(vector<int>& nums) {
+        int n = nums.size();
+        int j = 0;
+        for(int i = 1; i<n; i++){
+            if(nums[i] != nums[j]){
+                j++;
+                nums[j] = nums[i];
+            }
+        }
+        return j+1;
+    }
