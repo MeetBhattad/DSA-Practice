@@ -1,0 +1,17 @@
+283)
+Approach-
+using 2 pointers since we have to do the changes in-place
+take i and j to be 0
+run a for loop with i upto n. if the current element != 0 then swap i and j and move j.
+
+TC- O(N)
+void moveZeroes(vector<int>& nums) {
+        int n = nums.size();
+        int j = 0;
+        for(int i = 0; i<n; i++){
+            if(nums[i] != 0){
+                swap(nums[j], nums[i]);
+                j++;
+            }
+        }
+    }
