@@ -1,0 +1,22 @@
+1) Two Sum
+Approach-
+We will need a hashmap to store indices.
+check if the remaining value exists in the map. if it does, return the index of that and current index i.
+if it doesnt, then add it to the map and proceed.
+
+TC- O(N) SC- O(N)
+
+vector<int> twoSum(vector<int>& nums, int target) {
+        int n = nums.size();
+        map<int,int> mpp;
+        for(int i = 0; i<n; i++){
+            int rem = target - nums[i];
+            if(mpp.find(rem) != mpp.end()){
+                return {mpp[rem], i};
+            }
+            else{
+                mpp[nums[i]] = i;
+            }
+        }
+        return {-1, -1};
+    }
