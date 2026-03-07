@@ -1,0 +1,27 @@
+Approach-
+we use 2 pointers since we have the keyword "maximum"
+take l and r and start by adding the first element to map and increase its frequency
+if the condition exceeds (size > 2) we decrease the count of Lth element, and if its freq is 0, we erase it and shrink the window (l++)
+fianlly, when our condition satisfies (size <=2) we find maxlen and return it.
+
+TC- O(N)
+int totalFruits(vector<int>& fruits){
+        int n = fruits.size();
+        int l = 0;
+        int r = 0;
+        int maxlen = 0;
+        map<int, int> mpp;
+        while(r < n){
+            mpp[fruits[r]]++;
+            if(mpp.size() > 2){
+                mpp[fruits[l]]--;
+                if(mpp[fruits[l]] == 0) mpp.erase(fruits[l]);
+                l++;
+            }
+            if(mpp.size() <= 2){
+                maxlen = max(maxlen, r-l+1);
+            }
+            r++;
+        }
+        return maxlen;
+    }
