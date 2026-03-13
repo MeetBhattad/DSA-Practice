@@ -1,0 +1,31 @@
+903)
+Approach-
+understand that subarrays with exact sum k = subarray with sum atmost k - (subarray with sum atmost k - 1);
+take 2 pointers r and l, when sum > k, reduce sum, move l
+total count = count + r-l+1;
+
+class Solution {
+private:
+    int atmost(vector<int>& nums, int goal) {
+        if (goal < 0) return 0;
+        int n = nums.size();
+        int l = 0;
+        int r = 0;
+        int sum = 0;
+        int cnt = 0;
+        while(r < n){
+            sum += nums[r];
+            while(sum > goal){
+                sum = sum - nums[l];
+                l = l+1;
+            }
+            cnt = cnt + (r-l+1);
+            r = r+1;
+        }
+        return cnt;
+    }
+public:
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+        return atmost(nums, goal) - atmost(nums, goal - 1);
+    }
+};
