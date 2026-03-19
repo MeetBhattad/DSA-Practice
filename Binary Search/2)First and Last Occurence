@@ -1,0 +1,44 @@
+34)
+Approach-
+we will write a helper function which which would give us the first or last occurence based on the input boolean we give
+true for the first occurence and false for the last occurence.
+if its first occurence, we continue searching on the left to find firstmost
+if its last occurence. we continue searching on the right to find lastmost.
+
+class Solution {
+private:
+    int binarySearch(vector<int>& nums, int target, bool findFirst) {
+        int low = 0, high = nums.size() - 1;
+        int result = -1;
+        
+        while(low <= high) {
+            int mid = (low + high) / 2;
+            
+            if(nums[mid] == target) {
+                result = mid;
+                if(findFirst) {
+                    high = mid - 1;  // keep searching left
+                } else {
+                    low = mid + 1;   // keep searching right
+                }
+            }
+            else if(nums[mid] < target) {
+                low = mid + 1;
+            }
+            else {
+                high = mid - 1;
+            }
+        }
+        
+        return result;
+    }
+    
+public:
+vector<int> searchRange(vector<int>& nums, int target) {
+        int first = binarySearch(nums, target, true);
+        int last = binarySearch(nums, target, false);
+        
+        return {first, last};
+    }
+};
+    
