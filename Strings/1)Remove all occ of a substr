@@ -1,0 +1,14 @@
+lc 1910
+Approach-
+Use the functions, find and erase.
+
+class Solution {
+public:
+    string removeOccurrences(string s, string part) {
+    
+     while(s.find(part) != string::npos) {
+     s.erase(s.find(part), part.length());
+    }
+return s;
+    }
+};
