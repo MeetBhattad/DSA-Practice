@@ -1,0 +1,36 @@
+LC 443)
+Approach-
+take 2 pointers i and j to group the characters which are same. take another pointer to write the answer to our character array
+compare i and j (j = i+1) to find the group and then write the character by using index++ (to increment it as well)
+count = j-i and if count > 1, conver it to string, write the string to the character array.
+move ahead to the next group by i = j
+
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        int i = 0;
+        int ansIndex = 0;
+        int n = chars.size();
+
+        while(i < n){
+            int j = i+1;
+            while(j < n && chars[i] == chars[j]){
+                j++;
+            }
+
+            chars[ansIndex++] = chars[i];
+
+            int cnt = j-i;
+
+            if(cnt > 1){
+                string count = to_string(cnt);
+                for(char ch : count){
+                    chars[ansIndex++] = ch;
+                }
+            }
+            i = j;
+        }
+        return ansIndex;
+
+    }
+};
