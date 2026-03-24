@@ -1,0 +1,18 @@
+LC 14)
+Approach- Sort the vector string so that the first and last string will have the most common prefix
+compare characters of first and last until equal then return the substring of first
+
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        sort(strs.begin() , strs.end());
+        string first = strs[0];
+        string last = strs.back();
+
+        int i = 0;
+        while(i < first.size() && first[i] == last[i]){
+            i++;
+        }
+        return first.substr(0, i);
+    }
+};
