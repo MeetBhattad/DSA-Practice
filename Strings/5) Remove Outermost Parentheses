@@ -1,0 +1,26 @@
+LC 1021
+The problem statement is confusing. it simply means every opening should have a closing. thats primitive string.
+(()())(()) = ( () () ) + ( () )
+
+after removing outermost brackets of the primitive string, we have to see if every opening has a closing.
+=> () () and () which is true so return the 3 brackets.
+
+class Solution {
+public:
+    string removeOuterParentheses(string s) {
+        int n = s.size();
+        int depth = 0;
+        string ans;
+        for(char ch : s){
+            if(ch == '('){
+                if(depth > 0) ans += ch;
+                depth++;
+            }
+            else{
+                depth--;
+                if(depth > 0) ans += ch;
+            }
+        }
+        return ans;
+    }
+};
