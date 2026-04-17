@@ -1,0 +1,60 @@
+Approach-
+We will use the first row and column as the markers.
+first check if the first row or colummn has a zero, if yes make the boolean value true
+now mark the first row or column to be zero if any of the matrix element is 0
+after it, iterate in the matrix and turn the element to 0 if the first row or column has a 0
+in the end, turn the first row or column zero based on the boolean value if its true
+
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+
+        bool firstrowzero = false;
+        bool firstcolumnzero = false;
+
+        for(int j = 0; j<n; j++){
+            if(matrix[0][j] == 0){
+                firstrowzero = true;
+                break;
+            }
+        }
+
+        for(int i = 0; i<m; i++){
+            if(matrix[i][0] == 0){
+                firstcolumnzero = true;
+                break;
+            }
+        }
+
+        for(int i = 1; i<m; i++){
+            for(int j = 1; j<n; j++){
+                if(matrix[i][j] == 0){
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+
+        for(int i = 1; i<m; i++){
+            for(int j = 1; j<n; j++){
+                if(matrix[i][0] == 0 || matrix[0][j] == 0){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        if(firstrowzero){
+            for(int j = 0; j<n; j++){
+                matrix[0][j] = 0;
+            }
+        }
+
+        if(firstcolumnzero){
+            for(int i = 0; i<m; i++){
+                matrix[i][0] = 0;
+            }
+        }
+    }
+};
