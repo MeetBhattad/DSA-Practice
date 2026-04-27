@@ -1,0 +1,34 @@
+Approach-
+1st case if its sorted then low <= high, ans = low and break
+if left half sorted (low <= mid) update ans to low and move low = mid + 1;
+else right half sorted update ans to mid and move high = mid - 1;
+
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+       int n = nums.size();
+       int low = 0;
+       int high = n-1;
+       int mini = INT_MAX;
+
+       while(low <= high){
+        int mid = (low+high)/2;
+
+        if(nums[low] <= nums[high]){
+            mini = min(mini, nums[low]);
+            break;
+        }
+
+        else if(nums[mid] >= nums[low]){
+            mini = min(mini, nums[low]);
+            low = mid + 1;
+        }
+
+        else{
+            mini = min(mini, nums[mid]);
+            high = mid - 1;
+        }
+       } 
+       return mini;
+    }
+};
