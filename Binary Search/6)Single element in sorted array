@@ -1,0 +1,20 @@
+Approach- Elements right ofthe single element are odd,even and elements left of the single element are even,odd.
+we check if the mid is odd index, we force it to be even
+then check the pair mid and mid+1 if they are same that means we are on the left side of the element (correct side) so we skip low to mid+2
+else means we are on right side so we do high = mid - 1;
+
+int singleNonDuplicate(vector<int>& nums) {
+    int low = 0, high = nums.size() - 1;
+
+    while(low < high){
+        int mid = (low + high) / 2;
+
+        if(mid % 2 == 1) mid--;  // force even index
+
+        if(nums[mid] == nums[mid+1])
+            low = mid + 2;
+        else
+            high = mid;
+    }
+    return nums[low];
+}
