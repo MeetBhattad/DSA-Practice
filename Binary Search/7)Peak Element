@@ -1,0 +1,25 @@
+Approach-
+think of it like a mountain. if we are on increasing slope (mid+1 > mid), peak could be on right
+else we are on a decreasing slope that means peak is on left so we do high = mid (include mid)
+
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int n = nums.size();
+        int low = 0;
+        int high = n-1;
+        int mid = (low+high)/2;
+
+        while(low < high){
+            
+            if(nums[mid] < nums[mid+1]){
+                low = mid+1;
+            }
+            else{
+                high = mid;
+            }
+            mid = (low+high)/2;
+        }
+        return mid;
+    }
+};
