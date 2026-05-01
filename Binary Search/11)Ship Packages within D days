@@ -1,0 +1,46 @@
+Approach-
+Helper functions should calculate the no of days required to ship a capacity c.
+initially load = 0
+if load + weights[i] > capacity, we go to the next day (day + 1) and the load would be weights[i]
+else, we keep on adding to the load
+
+class Solution {
+private:
+    int daysReqd(vector<int>& weights, int capacity){
+        int n = weights.size();
+        int currentload = 0;
+        int days = 1;
+        for(int w : weights){
+            if(currentload + w <= capacity){
+                currentload += w;
+            }
+            else{
+                days++;
+                currentload = w;
+            }
+        }
+        return days;
+    }
+public:
+    int shipWithinDays(vector<int>& weights, int days) {
+        int n = weights.size();
+        int maxweight = 0;
+        long long totalweight = 0;
+        for(int w : weights){
+            maxweight = max(maxweight, w);
+            totalweight += w;
+        }
+        int low = maxweight, high = totalweight, ans = high;
+        while(low <= high){
+            int mid = (low+high)/2;
+            int reqddays = daysReqd(weights, mid);
+
+            if(reqddays <= days){
+                ans = mid;
+                high = mid - 1;
+            }
+            else low = mid + 1;
+        }
+        return ans;
+    }
+};
