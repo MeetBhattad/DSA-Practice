@@ -1,0 +1,48 @@
+Approach- 
+make a helper function to calculate the total sum after dividing each element by divisor so we can compare it with threshold
+trick- instead of ceil use (arr[i] + divisor -1)/divisor
+
+class Solution {
+private:
+
+    int getMaxValue(vector<int>& nums){
+        int maxVal = INT_MIN;
+        for(int x : nums){
+            maxVal = max(maxVal, x);
+        }
+        return maxVal;
+    }
+
+
+    long long computeTotalAfterDivision(vector<int>& nums, int divisor){
+        long long totalSum = 0;
+
+        for(int x : nums){
+            totalSum += (x + divisor - 1) / divisor;  
+        }
+
+        return totalSum;
+    }
+
+public:
+    int smallestDivisor(vector<int>& nums, int threshold) {
+        int low = 1;
+        int high = getMaxValue(nums);
+        int answer = high;
+
+        while(low <= high){
+            int mid = low + (high - low) / 2;
+
+            long long currentSum = computeTotalAfterDivision(nums, mid);
+
+            if(currentSum <= threshold){
+                answer = mid;           
+                high = mid - 1;         
+            } else {
+                low = mid + 1;          
+            }
+        }
+
+        return answer;
+    }
+};
