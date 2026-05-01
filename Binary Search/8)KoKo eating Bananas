@@ -1,0 +1,38 @@
+Approach-
+we first write a function to calculate total hours required to eat the pile.
+initialise binary search from low = 1 to high = max of the element (thats our range)
+if total hours is less than given hours, we move further towards left to find the minimum, else move right
+
+class Solution {
+private:
+    int findMax(vector<int> &piles){
+        int maxi = 0;
+        for(int i = 0; i<piles.size(); i++){
+            maxi = max(maxi, piles[i]);
+        }
+        return maxi;
+    }
+    long long TimeReqd(vector<int> &piles, int k){
+        long long totaltime = 0;
+        for(int i = 0; i<piles.size(); i++){
+            totaltime += ceil((double) piles[i] / (double) k);
+        }
+        return totaltime;
+    }
+public:
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int n = piles.size();
+        int low = 1;
+        int high = findMax(piles);
+
+        while(low <= high){
+            int mid = (low+high)/2;
+            long long totalH = TimeReqd(piles, mid);
+            if(totalH <= h){
+                high = mid - 1;
+            }
+            else low = mid + 1;
+        }
+        return low;
+    }
+};
