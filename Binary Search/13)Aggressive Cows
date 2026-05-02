@@ -1,0 +1,36 @@
+Approach-
+Helper function will tell us if we can place the given number of cows, at a distance d.
+initially cnt of cow would be 1 and the last stall would be nums[0] i.e first stall
+if(nums[i] - last stall >= distance) we can place the cow, increase the cnt of cow and update last stall to nums[i].
+
+in main function, we check if we can place the cow, then move low = mid + 1 because we need to find the maximum distance. else move  high
+
+class Solution {
+private:
+    bool canwePlace(vector<int> &nums, int dist, int k){
+        int n = nums.size();
+        int cows = 1;
+        int last = nums[0];
+        for(int i = 1; i<n; i++){
+            if(nums[i] - last >= dist){
+                last = nums[i];
+                cows = cows + 1;
+            }
+        }
+        return cows >= k;
+    }
+public:
+    int aggressiveCows(vector<int> &nums, int k) {
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        int low = 0, high = nums[n-1] - nums[0];
+        while(low <= high){
+            int mid = (low+high)/2;
+            if(canwePlace(nums, mid, k)){
+                low = mid + 1;
+            }
+            else high = mid - 1;
+        }
+        return high;
+    }
+};
