@@ -1,0 +1,24 @@
+Approach-
+we first find the missing numbers till that index = arr[mid] - (mid+1)
+apply bs on them and remember initially low points to an index <= k and after the bs, it would point to an index > k.
+same with high.
+
+int findKthPositive(vector<int>& arr, int k) {
+    int n = arr.size();
+    int low = 0, high = n - 1;
+
+    while(low <= high){
+        int mid = (low + high) / 2;
+        int missing = arr[mid] - (mid + 1);
+
+        if(missing < k) low = mid + 1;
+        else high = mid - 1;
+    }
+
+    if(high < 0) return k;  // edge case
+
+    int missing = arr[high] - (high + 1);
+    int remaining = k - missing;
+
+    return arr[high] + remaining;
+}
