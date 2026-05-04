@@ -1,0 +1,45 @@
+Approach-
+Helper function will count the number of students required if each student is allowed to read that maximum pages (mid in our case)
+initially student = 1 and pages = 0. we keep on adding current pages to pages until it doesnt exceed the max pages
+if it does exceed maxpages, we increase the count of student (that means 1 more student would be required) and change the
+current value of pages to the element
+in main, if it takes more students than allowed, that means value of maxpages it low and we need to increase it
+if its within the allowed students (m) that means we can try a better answer(smaller), high = mid - 1
+
+
+class Solution{
+int countStudents(vector<int> &arr, int pages) {
+    int n = arr.size(); 
+    int students = 1;
+    long long pagesStudent = 0;
+    for (int i = 0; i < n; i++) {
+        if (pagesStudent + arr[i] <= pages) {
+            //add pages to current student
+            pagesStudent += arr[i];
+        }
+        else {
+            //add pages to next student
+            students++;
+            pagesStudent = arr[i];
+        }
+    }
+    return students;
+}
+
+int findPages(vector<int>& arr, int n, int m) {
+    if (m > n) return -1;
+
+    int low = *max_element(arr.begin(), arr.end());
+    int high = accumulate(arr.begin(), arr.end(), 0);
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        int students = countStudents(arr, mid);
+        if (students > m) {
+            low = mid + 1;
+        }
+        else {
+            high = mid - 1;
+        }
+    }
+    return low;
+}
