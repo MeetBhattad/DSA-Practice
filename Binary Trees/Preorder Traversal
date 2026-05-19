@@ -1,0 +1,18 @@
+Preorder is Root Left Right
+So we print root, traverse left until we reach a null node then traverse right until a null node is reached
+class Solution {
+private:
+    void preorder(TreeNode* root, vector<int> &ans) {
+        if(root == NULL) return;
+
+        ans.push_back(root->val);
+        preorder(root->left, ans);
+        preorder(root->right, ans);
+    }
+public:
+    vector<int> preorderTraversal(TreeNode* root){
+        vector<int> ans;
+        preorder(root, ans);
+        return ans;
+    }
+};
