@@ -1,0 +1,28 @@
+Initialise an empt queue and push the root into it
+now while the queue is not empty, we take the size of the queue (which means no of node at that level) and iterate over it to
+temporarily store the values of that level.
+for each node, take the front node from the queue, pop it and check if it has left node, add it to the queue,if it has
+right node, add it to the queue and in the end store the current value of the node to the temporary level
+pushback the level to ans and return ans
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> ans;
+        if(root == NULL) return ans;
+        queue <TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            int size = q.size();
+            vector<int> level;
+            for(int i = 0; i<size; i++){
+                TreeNode* node = q.front();
+                q.pop();
+                if(node->left != NULL) q.push(node->left);
+                if(node->right != NULL) q.push(node->right);
+                level.push_back(node->val);
+            }
+            ans.push_back(level);
+        }
+        return ans;
+    }
+};
