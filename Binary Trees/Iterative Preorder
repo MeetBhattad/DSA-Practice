@@ -1,0 +1,42 @@
+we will be using the stack, print the root value, add right child then left child since stack is LIFO
+
+Create a vector to store the answer and an empty stack, push the root of the node in it
+while the stack is not empty, tkae the top of the stack, remove it and push it to answer vector
+if it has right child, push it to stack and if it has left child, push it as well
+
+class Solution {
+public:
+    
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> preorder;  
+        
+        // If the root is null, return an empty traversal result
+        if(root == nullptr) {
+            return preorder;
+        }
+        
+        stack<TreeNode*> st;  // Stack to store nodes during traversal
+        st.push(root);  // Push the root node onto the stack
+        
+        // Perform iterative preorder traversal
+        while(!st.empty()) {
+            root = st.top();  // Get the current node from the top of the stack
+            st.pop();  // Remove the node from the stack
+            
+            preorder.push_back(root->val);  // Add the node's value to the preorder result
+            
+            // Push the right child onto the stack if exists
+            if(root->right != nullptr) {
+                st.push(root->right);
+            }
+            
+            // Push the left child onto the stack if exists
+            if(root->left != nullptr) {
+                st.push(root->left);
+            }
+        }
+        
+        // Return the preorder traversal result
+        return preorder;
+    }
+};
