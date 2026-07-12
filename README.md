@@ -12,7 +12,5 @@ Topics Covered:
 - Binary Search
 - Linked List
 - Stack and Queue
-- Recursion
-- Trees
-- Graphs
-- DP
+- Recursion and Backtracking
+- Binary Trees
